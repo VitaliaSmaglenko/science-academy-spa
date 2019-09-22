@@ -1,0 +1,17 @@
+html {
+  overflow: hidden;
+}
+
+body {
+  background-image: url(./main_bg.jpg);
+  height: 100vh;
+}
+
+.app {
+  height: 100%;
+  overflow: auto;
+}
+
+.v-messages__message {
+  color: red !important;
+}

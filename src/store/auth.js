@@ -25,7 +25,6 @@ const mutations = {
     state.user = {
       id: null,
       role: null,
-      login: null,
       email: null
     }
     authHelper.unauthorize()
@@ -38,23 +37,22 @@ const mutations = {
 const getters = {}
 
 const actions = {
-  async signin (context, { credentials }) {
+  async signIn (context, credentials) {
     try {
       const response = await authApi.signIn(credentials)
-      const user = response.data.result
+      const { user, token } = response.data.result
 
       context.commit('authorize', user)
-      authHelper.authorize(state.user)
-
+      authHelper.authorize(state.user, token.token_type + ' ' + token.access_token)
     } catch (error) {
       let message = error.response && error.response.status === 401
-        ? "Wrong credentials"
-        : "Server error"
+        ? 'Не корректні данні'
+        : 'Помилка сервера'
 
       context.commit('setError', message)
     }
   },
-  signout (context) {
+  signOut (context) {
     context.commit('unauthorize')
     context.dispatch('resetAllState', {}, { root: true })
     router.push({ name: 'auth.signin' })

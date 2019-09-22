@@ -5,7 +5,10 @@ import auth from '../helpers/auth'
 import router from '../router'
 
 const axios = Axios.create({
-  baseURL: config.API_BASE_URL
+  baseURL: config.API_BASE_URL,
+  headers: {
+    common: { 'Authorization': auth.getToken() }
+  }
 })
 
 const requestErrorHandler = (error) => {
