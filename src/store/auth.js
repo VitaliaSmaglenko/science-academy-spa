@@ -1,13 +1,14 @@
 import authApi from './../api/auth'
 import authHelper from './../helpers/auth'
 import router from './../router'
+import axios from '../api/axios'
 
 const initial = () => ({
   authorized: false,
   error: null,
   user: authHelper.getUser() || {
     id: null,
-    role: null,
+    roles: [],
     email: null
   }
 })
@@ -24,7 +25,7 @@ const mutations = {
     state.authorized = false
     state.user = {
       id: null,
-      role: null,
+      roles: [],
       email: null
     }
     authHelper.unauthorize()
@@ -40,10 +41,11 @@ const actions = {
   async signIn (context, credentials) {
     try {
       const response = await authApi.signIn(credentials)
-      const { user, token } = response.data.result
-
-      context.commit('authorize', user)
-      authHelper.authorize(state.user, token.token_type + ' ' + token.access_token)
+      const data = response.data.data
+      context.commit('authorize', data.user)
+      authHelper.authorize(state.user, data.token_type + ' ' + data.access_token)
+      axios.defaults.headers.common['Authorization'] = authHelper.getToken()
+      router.push({ name: 'home' })
     } catch (error) {
       let message = error.response && error.response.status === 401
         ? 'Не корректні данні'
@@ -55,7 +57,7 @@ const actions = {
   signOut (context) {
     context.commit('unauthorize')
     context.dispatch('resetAllState', {}, { root: true })
-    router.push({ name: 'auth.signin' })
+    router.push({ name: 'SignIn' })
   }
 }
 

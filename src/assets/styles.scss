@@ -12,6 +12,6 @@ body {
   overflow: auto;
 }
 
-.v-messages__message {
-  color: red !important;
+.v-messages__message, .error-msg {
+  color: red;
 }

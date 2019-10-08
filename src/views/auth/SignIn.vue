@@ -5,7 +5,7 @@
         <img alt="УIПА" src="./../../assets/logo.png"/>
       </div>
       <v-card-text>
-        <div class=".v-messages__message" v-if="error">
+        <div class="error-msg" v-if="error">
           {{ error }}
         </div>
         <v-form

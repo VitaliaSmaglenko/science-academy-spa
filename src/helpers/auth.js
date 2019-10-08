@@ -1,9 +1,5 @@
-const getUser = () => {
-  return JSON.parse(localStorage.getItem('user'))
-}
-
 const isAuthorized = () => {
-  return !!getUser()
+  return !!getUser() && !!getToken()
 }
 
 const authorize = (user, token) => {
@@ -24,11 +20,15 @@ const getToken = () => {
   return JSON.parse(localStorage.getItem('token'))
 }
 
+const getUser = () => {
+  return JSON.parse(localStorage.getItem('user'))
+}
+
 export default {
-  getUser,
   isAuthorized,
   authorize,
   unauthorize,
   setToken,
-  getToken
+  getToken,
+  getUser
 }
