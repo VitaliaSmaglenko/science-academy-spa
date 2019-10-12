@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import guardMiddleware from './router/guardMiddleware'
 
-import Home from './views/Home.vue'
+import Dashboard from './views/Dashboard.vue'
 import SignIn from './views/auth/SignIn'
 import ChooseDepartment from './views/auth/ChooseDepartment'
 
@@ -19,15 +19,15 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home,
+      name: 'Dashboard',
+      component: Dashboard,
       meta: { ...authWithDepartment, redirect: { name: 'SignIn' } }
     },
     {
       path: '/auth',
       name: 'SignIn',
       component: SignIn,
-      meta: { onlyGuests: true, redirect: { name: 'Home' } }
+      meta: { onlyGuests: true, redirect: { name: 'Dashboard' } }
     },
     {
       path: '/auth/choose-department',

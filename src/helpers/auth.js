@@ -17,6 +17,10 @@ const unauthorize = () => {
   localStorage.removeItem('department')
 }
 
+const resetDepartment = () => {
+  localStorage.removeItem('department')
+}
+
 const setToken = (token) => {
   return localStorage.setItem('token', JSON.stringify(token))
 }
@@ -42,6 +46,7 @@ export default {
   departmentIsChosen,
   authorize,
   unauthorize,
+  resetDepartment,
   setToken,
   setCurrentDepartment,
   getToken,

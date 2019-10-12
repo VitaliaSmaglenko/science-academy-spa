@@ -2,7 +2,7 @@
   <div class="container">
     <v-card class="login">
       <div class="login-logo">
-        <img alt="УIПА" src="./../../assets/logo.png"/>
+        <img alt="УIПА" :src="Logo"/>
       </div>
       <v-card-text>
         <div class="error-msg" v-if="error">
@@ -46,9 +46,12 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import Logo from './../../assets/Logo.png'
+
 export default {
   name: 'SignIn',
   data: () => ({
+    Logo,
     valid: true,
     credentials: {
       email: '',

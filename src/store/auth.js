@@ -66,7 +66,12 @@ const actions = {
   selectDepartment (context, department) {
     context.commit('setCurrentDepartment', department)
     authHelper.setCurrentDepartment(department)
-    router.push({ name: 'Home' })
+    router.push({ name: 'Dashboard' })
+  },
+  changeDepartment (context) {
+    context.commit('setCurrentDepartment', null)
+    authHelper.resetDepartment()
+    router.push({ name: 'ChooseDepartment' })
   }
 }
 
