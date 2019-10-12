@@ -10,7 +10,8 @@ const initial = () => ({
     id: null,
     roles: [],
     email: null
-  }
+  },
+  department: authHelper.getCurrentDepartment() || {}
 })
 
 const state = initial()
@@ -32,6 +33,9 @@ const mutations = {
   },
   setError (state, error) {
     state.error = error
+  },
+  setCurrentDepartment (state, department) {
+    state.department = department
   }
 }
 
@@ -45,7 +49,7 @@ const actions = {
       context.commit('authorize', data.user)
       authHelper.authorize(state.user, data.token_type + ' ' + data.access_token)
       axios.defaults.headers.common['Authorization'] = authHelper.getToken()
-      router.push({ name: 'home' })
+      router.push({ name: 'ChooseDepartment' })
     } catch (error) {
       let message = error.response && error.response.status === 401
         ? 'Не корректні данні'
@@ -58,6 +62,11 @@ const actions = {
     context.commit('unauthorize')
     context.dispatch('resetAllState', {}, { root: true })
     router.push({ name: 'SignIn' })
+  },
+  selectDepartment (context, department) {
+    context.commit('setCurrentDepartment', department)
+    authHelper.setCurrentDepartment(department)
+    router.push({ name: 'Home' })
   }
 }
 
