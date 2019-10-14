@@ -1,7 +1,14 @@
 <template>
   <div class="dashboard">
     <Navbar></Navbar>
-    <div class="main-container"></div>
+    <div class="main-container">
+      <div class="main-content">
+        <router-view></router-view>
+      </div>
+      <div class="footer">
+        Українська інженерно-педагогічна академія
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,9 +23,25 @@ export default {
 
 <style lang="scss" scoped>
   .dashboard {
-
+    height: 100vh;
+    overflow-y: hidden;
   }
   .main-container {
-
+    height: calc(100% - 80px);
+    overflow-y: auto;
+  }
+  .main-content {
+    height: 100%;
+    flex: 1 1 auto;
+    margin: 50px 100px 0 100px;
+    background-color: #fff;
+  }
+  .footer {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    height: 40px;
+    background-color: #983620;
+    color: #fff;
   }
 </style>

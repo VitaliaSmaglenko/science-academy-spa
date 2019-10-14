@@ -27,7 +27,7 @@ export default (to, from, next) => {
 
   const user = authHelper.getUser()
 
-  if (requiresRoles.length > 0 && !requiresRoles.includes(user.role)) {
+  if (requiresRoles.length > 0 && !requiresRoles.some(item => user.roles.map(r => r.name).includes(item))) {
     return next(redirect || '/')
   }
 

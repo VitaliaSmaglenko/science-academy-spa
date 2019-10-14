@@ -14,6 +14,9 @@
         </div>
       </template>
       <v-list>
+          <v-list-item v-if="canManage" :to="{ name: 'Management' }">
+            <v-list-item-title>Управління</v-list-item-title>
+          </v-list-item>
         <v-list-item @click="selectNewDepartment">
           <v-list-item-title>Змінити кафедру</v-list-item-title>
         </v-list-item>
@@ -27,13 +30,17 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import roles from './../../constants/roles'
 
 export default {
   name: 'AccountMenu',
   computed: {
     ...mapState('auth', {
       user: state => state.user
-    })
+    }),
+    canManage () {
+      return roles.MANAGEMENT_ROLES.some(item => this.user.roles.map(r => r.name).includes(item))
+    }
   },
   methods: {
     ...mapActions('auth', [
@@ -60,5 +67,8 @@ export default {
     i {
       color: #983620;
     }
+  }
+  .menu-link {
+    text-decoration: none;
   }
 </style>

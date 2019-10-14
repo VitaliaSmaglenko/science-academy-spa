@@ -24,6 +24,7 @@ export default {
 
 <style lang="scss" scoped>
   .navbar {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     height: 80px;

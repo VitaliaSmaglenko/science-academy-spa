@@ -2,6 +2,7 @@ import authApi from './../api/auth'
 import authHelper from './../helpers/auth'
 import router from './../router'
 import axios from '../api/axios'
+import roles from './../constants/roles'
 
 const initial = () => ({
   authorized: false,
@@ -39,7 +40,23 @@ const mutations = {
   }
 }
 
-const getters = {}
+const getters = {
+  isAdmin: (state) => {
+    return state.user.roles.some(r => r.name === roles.ROLE_ADMIN)
+  },
+  isManager: (state) => {
+    return state.user.roles.some(r => r.name === roles.ROLE_MANAGER)
+  },
+  getHighestRole: (state, getters) => {
+    if (getters.isAdmin) {
+      return roles.ROLE_ADMIN
+    }
+    if (getters.isManager) {
+      return roles.ROLE_MANAGER
+    }
+    return roles.ROLE_TEACHER
+  }
+}
 
 const actions = {
   async signIn (context, credentials) {

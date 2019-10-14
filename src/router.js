@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import guardMiddleware from './router/guardMiddleware'
+import roles from './constants/roles'
 
 import Dashboard from './views/Dashboard.vue'
 import SignIn from './views/auth/SignIn'
 import ChooseDepartment from './views/auth/ChooseDepartment'
+import Management from './views/management/Management'
 
 Vue.use(Router)
 
@@ -21,7 +23,15 @@ const router = new Router({
       path: '/',
       name: 'Dashboard',
       component: Dashboard,
-      meta: { ...authWithDepartment, redirect: { name: 'SignIn' } }
+      meta: { ...authWithDepartment, redirect: { name: 'SignIn' } },
+      children: [
+        {
+          path: '/manage',
+          name: 'Management',
+          component: Management,
+          meta: { requiresRoles: roles.MANAGEMENT_ROLES, redirect: { name: 'Dashboard' } }
+        }
+      ]
     },
     {
       path: '/auth',
