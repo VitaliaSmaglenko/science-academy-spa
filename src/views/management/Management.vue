@@ -2,6 +2,7 @@
   <div class="content">
     <div class="manage-title">
       Кабінет управління:
+      <div class="manage-underline"></div>
     </div>
     <div class="manage-actions">
       <v-btn
@@ -24,24 +25,24 @@ export default {
   name: 'Management',
   data () {
     return {
-      [roles.ROLE_ADMIN]: [
+      [roles.ROLE_ADMIN.value]: [
         {
           name: 'Управління кафедрами',
           to: { name: '' }
         },
         {
           name: 'Управління користувачами',
-          to: { name: '' }
+          to: { name: 'UserList' }
         }
       ],
-      [roles.ROLE_MANAGER]: [
+      [roles.ROLE_MANAGER.value]: [
         {
           name: 'Управління кафедрами',
           to: { name: '' }
         },
         {
           name: 'Управління користувачами',
-          to: { name: '' }
+          to: { name: 'UserList' }
         }
       ]
     }
@@ -58,11 +59,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .manage-title {
-    padding: 25px;
-    font-size: 22px;
-    border-bottom: 1px solid #c2c2c2;
-  }
   .manage-actions {
     padding: 15px 40px 0 40px;
     display: flex;
