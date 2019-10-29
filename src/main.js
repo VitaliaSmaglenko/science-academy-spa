@@ -5,11 +5,13 @@ import router from './router'
 import store from './store'
 import vueAxios from 'vue-axios'
 import axios from './api/axios'
+import Notifications from 'vue-notification'
 
 import './assets/styles.scss'
 
 Vue.config.productionTip = false
 Vue.use(vueAxios, axios)
+Vue.use(Notifications)
 
 new Vue({
   router,
