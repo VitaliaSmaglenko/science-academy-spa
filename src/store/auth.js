@@ -42,19 +42,19 @@ const mutations = {
 
 const getters = {
   isAdmin: (state) => {
-    return state.user.roles.some(r => r.name === roles.ROLE_ADMIN)
+    return state.user.roles.some(r => r.name === roles.ROLE_ADMIN.value)
   },
   isManager: (state) => {
-    return state.user.roles.some(r => r.name === roles.ROLE_MANAGER)
+    return state.user.roles.some(r => r.name === roles.ROLE_MANAGER.value)
   },
   getHighestRole: (state, getters) => {
     if (getters.isAdmin) {
-      return roles.ROLE_ADMIN
+      return roles.ROLE_ADMIN.value
     }
     if (getters.isManager) {
-      return roles.ROLE_MANAGER
+      return roles.ROLE_MANAGER.value
     }
-    return roles.ROLE_TEACHER
+    return roles.ROLE_TEACHER.value
   }
 }
 
@@ -62,9 +62,9 @@ const actions = {
   async signIn (context, credentials) {
     try {
       const response = await authApi.signIn(credentials)
-      const data = response.data.data
-      context.commit('authorize', data.user)
-      authHelper.authorize(state.user, data.token_type + ' ' + data.access_token)
+      const { user, token } = response.data.data
+      context.commit('authorize', user)
+      authHelper.authorize(state.user, token.token_type + ' ' + token.access_token)
       axios.defaults.headers.common['Authorization'] = authHelper.getToken()
       router.push({ name: 'ChooseDepartment' })
     } catch (error) {

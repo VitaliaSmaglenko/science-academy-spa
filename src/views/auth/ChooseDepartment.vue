@@ -3,11 +3,12 @@
       <v-card class="post-login">
         <div class="post-login-title">
           Оберіть кафедру:
+          <v-btn @click="logout" color="#983620">Змінити користувача</v-btn>
         </div>
         <v-card-text>
           <v-btn
             class="post-login-btn"
-            v-for="item in departments"
+            v-for="item in user.departments"
             :key="item.id"
             color="#983620"
             @click="select(item)"
@@ -20,34 +21,25 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'ChooseDepartment',
-  data () {
-    return {
-      departments: [
-        {
-          id: 1,
-          name: 'Кафедра охорони праці, стандартизації та сертифікації'
-        },
-        {
-          id: 2,
-          name: 'Кафедра фізики, електротехніки і електроенергетики'
-        },
-        {
-          id: 3,
-          name: 'Кафедра інтегрованих технологій в машинобудуванні та зварювального виробництва'
-        }
-      ]
-    }
+  computed: {
+    ...mapState('auth', {
+      user: state => state.user
+    })
   },
   methods: {
     ...mapActions('auth', [
-      'selectDepartment'
+      'selectDepartment',
+      'signOut'
     ]),
     select (department) {
       this.selectDepartment(department)
+    },
+    logout () {
+      this.signOut()
     }
   }
 }
@@ -67,6 +59,8 @@ export default {
   }
 
   .post-login-title {
+    display: flex;
+    justify-content: space-between;
     font-size: 22px;
     padding: 15px;
   }
@@ -83,6 +77,12 @@ export default {
     .v-btn__content {
       width: 100%;
       white-space: pre-wrap;
+    }
+  }
+  .post-login-title {
+    .v-btn__content {
+      color: #fff;
+      text-transform: capitalize;
     }
   }
 </style>
