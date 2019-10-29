@@ -27,11 +27,12 @@ export default {
     overflow-y: hidden;
   }
   .main-container {
+    display: flex;
+    flex-direction: column;
     height: calc(100% - 80px);
     overflow-y: auto;
   }
   .main-content {
-    height: 100%;
     flex: 1 1 auto;
     margin: 50px 100px 0 100px;
     background-color: #fff;

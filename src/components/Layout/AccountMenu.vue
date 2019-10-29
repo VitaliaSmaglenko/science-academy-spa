@@ -39,7 +39,7 @@ export default {
       user: state => state.user
     }),
     canManage () {
-      return roles.MANAGEMENT_ROLES.some(item => this.user.roles.map(r => r.name).includes(item))
+      return roles.MANAGEMENT_ROLES.some(item => this.user.roles.map(r => r.name).includes(item.value))
     }
   },
   methods: {
