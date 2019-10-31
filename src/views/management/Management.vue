@@ -6,12 +6,18 @@
     </div>
     <div class="manage-actions">
       <v-btn
-        v-for="(action, index) in actions"
-        :key="index"
-        :to="action.to"
+        v-if="canManageDepartments"
+        :to="{}"
         color="#983620"
       >
-        {{ action.name }}
+        Управління кафедрами
+      </v-btn>
+      <v-btn
+        v-if="canManageUsers"
+        :to="{ name: 'UserList' }"
+        color="#983620"
+      >
+        Управління користувачами
       </v-btn>
     </div>
   </div>
@@ -23,36 +29,15 @@ import roles from './../../constants/roles'
 
 export default {
   name: 'Management',
-  data () {
-    return {
-      [roles.ROLE_ADMIN.value]: [
-        {
-          name: 'Управління кафедрами',
-          to: { name: '' }
-        },
-        {
-          name: 'Управління користувачами',
-          to: { name: 'UserList' }
-        }
-      ],
-      [roles.ROLE_MANAGER.value]: [
-        {
-          name: 'Управління кафедрами',
-          to: { name: '' }
-        },
-        {
-          name: 'Управління користувачами',
-          to: { name: 'UserList' }
-        }
-      ]
-    }
-  },
   computed: {
     ...mapGetters('auth', [
       'getHighestRole'
     ]),
-    actions () {
-      return this[this.getHighestRole]
+    canManageUsers () {
+      return roles.MANAGEMENT_ROLES.some(r => r.value === this.getHighestRole)
+    },
+    canManageDepartments () {
+      return this.getHighestRole === roles.ROLE_ADMIN.value
     }
   }
 }
