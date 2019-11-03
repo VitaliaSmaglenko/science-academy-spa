@@ -45,9 +45,11 @@
 
 <script>
 import { mapActions } from 'vuex'
+import ContentWrapper from '../../../components/Layout/Management/ContentWrapper'
 
 export default {
   name: 'UserDetails',
+  components: { ContentWrapper },
   data () {
     return {
       user: {}

@@ -7,8 +7,6 @@
       :loading="loading"
       loading-text="Завантаження..."
     >
-      <template v-slot:top>
-      </template>
       <template v-slot:item="{ item }">
         <tr>
           <td class="text-start">{{ item.id }}</td>
@@ -94,11 +92,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .manage-title {
-    padding: 25px;
-    font-size: 22px;
-    border-bottom: none !important;
-  }
-</style>

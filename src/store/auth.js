@@ -10,6 +10,7 @@ const initial = () => ({
   user: authHelper.getUser() || {
     id: null,
     roles: [],
+    departments: [],
     email: null
   },
   department: authHelper.getCurrentDepartment() || {}
@@ -55,6 +56,9 @@ const getters = {
       return roles.ROLE_MANAGER.value
     }
     return roles.ROLE_TEACHER.value
+  },
+  hasDepartment: (state) => (id) => {
+    return state.user.departments.some(d => d.id === id)
   }
 }
 

@@ -102,7 +102,7 @@ export default {
       this.form.science_degree = this.user.science_degree
     },
     async send () {
-      this.errors = await this.updateUser({ id: this.id, data: this.form })
+      this.errors = await this.updateUser({ id: this.user.id, data: this.form })
     }
   }
 }
