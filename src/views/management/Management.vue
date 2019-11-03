@@ -7,7 +7,7 @@
     <div class="manage-actions">
       <v-btn
         v-if="canManageDepartments"
-        :to="{}"
+        :to="{ name: 'DepartmentList' }"
         color="#983620"
       >
         Управління кафедрами

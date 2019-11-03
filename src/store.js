@@ -16,7 +16,8 @@ export default new Vuex.Store({
   modules,
   actions: {
     resetAllState (context) {
-
+      context.commit(`users/reset`)
+      context.commit(`departments/reset`)
     }
   }
 })
