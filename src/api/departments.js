@@ -19,5 +19,13 @@ export default {
 
   update: (id, data) => {
     return api.put(`/departments/${id}`, data)
+  },
+
+  addUser: (id, userId, position) => {
+    return api.put(`/departments/${id}/users`, { user_id: userId, position })
+  },
+
+  removeUser: (id, userId) => {
+    return api.delete(`/departments/${id}/users/${userId}`)
   }
 }

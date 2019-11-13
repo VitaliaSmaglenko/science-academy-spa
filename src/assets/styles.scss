@@ -22,39 +22,75 @@ body {
   justify-content: space-between;
   border-bottom: 1px solid #c2c2c2;
 }
+
 .manage-header-controls {
   padding: 25px;
+
   .v-btn__content {
     color: #fff;
     text-transform: capitalize;
   }
 }
+
 .manage-title {
   padding: 25px;
   font-size: 22px;
 }
+
 .manage-underline {
   width: 225px;
   height: 5px;
   background-color: #983620;
 }
+
 .manage-content {
   padding: 0 25px;
 }
+
 .manage-form {
   width: 30%
 }
+
 .table-header {
   &.left {
     text-align: left;
   }
 }
+
 .manage-controls {
   display: flex;
   justify-content: space-around;
   padding-top: 15px;
   padding-bottom: 30px;
+
   button {
     color: #fff !important;
   }
+}
+
+.v-data-footer {
+  .v-menu__content, .menuable__content__active {
+    top: 0 !important;
+    left: 0 !important;
+  }
+}
+
+// dialog
+.dialog-actions {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 20px;
+}
+
+// buttons
+.btn-main {
+  width: 100px;
+  text-transform: capitalize;
+  color: #fff !important;
+}
+
+.btn-empty {
+  width: 100px;
+  text-transform: capitalize;
+  color: #983620 !important;
 }

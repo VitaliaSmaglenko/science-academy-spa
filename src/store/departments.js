@@ -27,12 +27,8 @@ const actions = {
   },
 
   async getDepartment (context, id) {
-    let department = context.getters.getDepartment(id)
-    if (!department) {
-      const response = await api.get(id)
-      department = response.data.data
-    }
-    return department
+    const response = await api.get(id)
+    return response.data.data
   },
 
   async deleteDepartment (context, id) {
@@ -70,6 +66,20 @@ const actions = {
     } catch (e) {
       return e.response.data.errors
     }
+  },
+
+  async addUser (context, { id, userId, position }) {
+    const response = await api.addUser(id, userId, position)
+    return response.data.data
+  },
+
+  async removeUser (context, { id, userId }) {
+    const response = await api.removeUser(id, userId)
+    Vue.notify({
+      title: '',
+      text: response.data.data.message,
+      type: 'success'
+    })
   }
 }
 
