@@ -15,6 +15,7 @@
         :headers="headers"
         locale="ru-RU"
         class="users-list"
+        :loading="loading"
       >
         <template v-slot:item="{ item }">
           <tr>
@@ -93,6 +94,7 @@ export default {
       addUserDialog: false,
       position: null,
       targetUser: null,
+      loading: true,
       department: {},
       headers: [
         { text: 'Id', class: 'table-header left', value: 'id' },
@@ -124,6 +126,7 @@ export default {
     const id = this.$route.params.id
     this.department = await this.getDepartment(id)
     await this.fetchUsers()
+    this.loading = false
   },
   methods: {
     ...mapActions('departments', [
