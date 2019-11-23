@@ -42,20 +42,20 @@ const mutations = {
 }
 
 const getters = {
-  isTeacher: (state) => {
+  iAmTeacher: (state) => {
     return state.user.roles.some(r => r.name === roles.ROLE_TEACHER.value)
   },
-  isAdmin: (state) => {
+  iAmAdmin: (state) => {
     return state.user.roles.some(r => r.name === roles.ROLE_ADMIN.value)
   },
-  isManager: (state) => {
+  iAmManager: (state) => {
     return state.user.roles.some(r => r.name === roles.ROLE_MANAGER.value)
   },
   getHighestRole: (state, getters) => {
-    if (getters.isAdmin) {
+    if (getters.iAmAdmin) {
       return roles.ROLE_ADMIN.value
     }
-    if (getters.isManager) {
+    if (getters.iAmManager) {
       return roles.ROLE_MANAGER.value
     }
     return roles.ROLE_TEACHER.value
@@ -96,6 +96,15 @@ const actions = {
     context.commit('setCurrentDepartment', null)
     authHelper.resetDepartment()
     router.push({ name: 'ChooseDepartment' })
+  },
+  isTeacher: (context, user) => {
+    return user.roles.some(r => r.name === roles.ROLE_TEACHER.value)
+  },
+  isAdmin: (context, user) => {
+    return user.roles.some(r => r.name === roles.ROLE_ADMIN.value)
+  },
+  isManager: (context, user) => {
+    return user.roles.some(r => r.name === roles.ROLE_MANAGER.value)
   }
 }
 

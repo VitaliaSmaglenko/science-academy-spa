@@ -17,7 +17,7 @@
         <v-list-item v-if="canManage" :to="{ name: 'Management' }">
           <v-list-item-title>Управління</v-list-item-title>
         </v-list-item>
-        <v-list-item v-if="isTeacher" :to="{ name: 'ScienceProfiles' }">
+        <v-list-item v-if="iAmTeacher" :to="{ name: 'ScienceProfiles' }">
           <v-list-item-title>Наукові профілі</v-list-item-title>
         </v-list-item>
         <v-list-item @click="selectNewDepartment">
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import roles from './../../constants/roles'
 
 export default {
@@ -41,6 +41,9 @@ export default {
     ...mapState('auth', {
       user: state => state.user
     }),
+    ...mapGetters('auth', [
+      'iAmTeacher'
+    ]),
     canManage () {
       return roles.MANAGEMENT_ROLES.some(item => this.user.roles.map(r => r.name).includes(item.value))
     }
@@ -48,8 +51,7 @@ export default {
   methods: {
     ...mapActions('auth', [
       'signOut',
-      'changeDepartment',
-      'isTeacher'
+      'changeDepartment'
     ]),
     unauthorize () {
       this.signOut()

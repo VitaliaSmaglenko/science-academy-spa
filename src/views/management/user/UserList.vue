@@ -1,7 +1,7 @@
 <template>
   <ContentWrapper title="Лист користувачів" :buttons="[{ route: 'UserCreate', text: 'Створити'}]">
     <v-data-table
-      :items="users"
+      :items="filteredUsers"
       :headers="headers"
       locale="ru-RU"
       :loading="loading"
@@ -16,8 +16,8 @@
           <td class="text-start">
             {{ item.created_at ? new Date(item.created_at).toISOString().substring(0, 10) : '' }}
           </td>
-          <td class="text-start" v-if="user.id !== item.id">
-            <v-menu bottom offset-y>
+          <td class="text-start">
+            <v-menu v-if="user.id !== item.id" bottom offset-y>
               <template v-slot:activator="{ on }">
                 <v-btn class="ma-2" v-on="on" icon><v-icon>mdi-dots-horizontal</v-icon></v-btn>
               </template>
@@ -32,7 +32,7 @@
                     Редагування
                   </v-list-item-title>
                 </v-list-item>
-                <v-list-item class="action" @click="removeUser(item.id)">
+                <v-list-item v-if="!isAdmin(item)" class="action" @click="removeUser(item.id)">
                   <v-list-item-title class="action-item">
                     Видалити
                   </v-list-item-title>
@@ -47,14 +47,20 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import ContentWrapper from '../../../components/Layout/Management/ContentWrapper'
+import constants from './../../../constants'
+
+const {
+  ROLE_ADMIN
+} = constants.roles
 
 export default {
   name: 'UserList',
   components: { ContentWrapper },
   data () {
     return {
+      ROLE_ADMIN,
       loading: true,
       headers: [
         { text: 'Id', class: 'table-header left', value: 'id' },
@@ -72,16 +78,25 @@ export default {
   },
   computed: {
     ...mapState('auth', {
-      user: state => state.user
+      user: state => state.user,
+      department: state => state.department
     }),
     ...mapState('users', {
       users: state => state.users
-    })
+    }),
+    ...mapGetters('auth', [
+      'iAmAdmin'
+    ]),
+    filteredUsers () {
+      if (this.iAmAdmin) return this.users
+      return this.users.filter(u => u.departments.some(d => d.name === this.department.name))
+    }
   },
   methods: {
     ...mapActions('users', [
       'fetchUsers',
-      'deleteUser'
+      'deleteUser',
+      'isAdmin'
     ]),
     async removeUser (id) {
       await this.deleteUser(id)
