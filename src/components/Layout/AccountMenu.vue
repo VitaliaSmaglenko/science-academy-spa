@@ -14,9 +14,12 @@
         </div>
       </template>
       <v-list>
-          <v-list-item v-if="canManage" :to="{ name: 'Management' }">
-            <v-list-item-title>Управління</v-list-item-title>
-          </v-list-item>
+        <v-list-item v-if="canManage" :to="{ name: 'Management' }">
+          <v-list-item-title>Управління</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-if="isTeacher" :to="{ name: 'ScienceProfiles' }">
+          <v-list-item-title>Наукові профілі</v-list-item-title>
+        </v-list-item>
         <v-list-item @click="selectNewDepartment">
           <v-list-item-title>Змінити кафедру</v-list-item-title>
         </v-list-item>
@@ -45,7 +48,8 @@ export default {
   methods: {
     ...mapActions('auth', [
       'signOut',
-      'changeDepartment'
+      'changeDepartment',
+      'isTeacher'
     ]),
     unauthorize () {
       this.signOut()

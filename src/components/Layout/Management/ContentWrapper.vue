@@ -6,7 +6,9 @@
         <div class="manage-underline"></div>
       </div>
       <div class="manage-header-controls">
-        <v-btn v-for="(btn, index) in buttons" :key="index" :to="{ name: btn.route }" color="#983620">{{ btn.text }}</v-btn>
+        <slot name="actions">
+          <v-btn v-for="(btn, index) in buttons" :key="index" :to="{ name: btn.route }" color="#983620">{{ btn.text }}</v-btn>
+        </slot>
       </div>
     </div>
     <div class="manage-content">

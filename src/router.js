@@ -12,6 +12,7 @@ import PlannedWorksForUser from './views/plannedWorks/PlannedWorksForUser'
 import userRoutes from './router/routes/users'
 import departmentRoutes from './router/routes/departments'
 import completeWorks from './router/routes/completedWorks'
+import scienceProfiles from './router/routes/scienceProfiles'
 
 Vue.use(Router)
 
@@ -44,7 +45,8 @@ const router = new Router({
         },
         ...userRoutes,
         ...departmentRoutes,
-        ...completeWorks
+        ...completeWorks,
+        ...scienceProfiles
       ]
     },
     {

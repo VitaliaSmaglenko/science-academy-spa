@@ -19,7 +19,9 @@ export default new Vuex.Store({
       context.commit(`users/reset`)
       context.commit(`departments/reset`)
       context.commit(`completedWorks/reset`)
+      context.commit(`plannedWOrks/reset`)
       context.commit(`works/reset`)
+      context.commit(`scienceProfiles/reset`)
     }
   }
 })

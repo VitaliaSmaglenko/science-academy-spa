@@ -42,6 +42,9 @@ const mutations = {
 }
 
 const getters = {
+  isTeacher: (state) => {
+    return state.user.roles.some(r => r.name === roles.ROLE_TEACHER.value)
+  },
   isAdmin: (state) => {
     return state.user.roles.some(r => r.name === roles.ROLE_ADMIN.value)
   },
