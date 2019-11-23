@@ -6,7 +6,7 @@
         <div class="manage-underline"></div>
       </div>
       <div class="manage-header-controls">
-        <v-btn :to="{ name: actionRoute }" color="#983620">{{ actionText }}</v-btn>
+        <v-btn v-for="(btn, index) in buttons" :key="index" :to="{ name: btn.route }" color="#983620">{{ btn.text }}</v-btn>
       </div>
     </div>
     <div class="manage-content">
@@ -22,11 +22,8 @@ export default {
     title: {
       type: String
     },
-    actionRoute: {
-      type: String
-    },
-    actionText: {
-      type: String
+    buttons: {
+      type: Array
     }
   }
 }

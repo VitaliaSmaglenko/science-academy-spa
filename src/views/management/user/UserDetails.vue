@@ -1,5 +1,5 @@
 <template>
-  <ContentWrapper title="Дані користувача" action-route="UserList" action-text="Список користувачів">
+  <ContentWrapper title="Дані користувача" :buttons="[{ route: 'UserList', text: 'Список користувачів'}]">
     <KeyValueList :items="info" :sub-items-keys="{'departments':'name', 'roles':'name'}"></KeyValueList>
   </ContentWrapper>
 </template>

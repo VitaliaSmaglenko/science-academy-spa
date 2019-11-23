@@ -1,5 +1,5 @@
 <template>
-  <ContentWrapper title="Лист кафедр" action-route="DepartmentCreate" action-text="Створити">
+  <ContentWrapper title="Лист кафедр" :buttons="[{ route: 'DepartmentCreate', text: 'Створити'}]">
     <v-data-table
       :items="departments"
       :headers="headers"

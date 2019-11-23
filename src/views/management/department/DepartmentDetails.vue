@@ -1,5 +1,5 @@
 <template>
-  <ContentWrapper title="Дані кафедри" action-route="DepartmentList" action-text="Список кафедр">
+  <ContentWrapper title="Дані кафедри" :buttons="[{ route: 'DepartmentList', text: 'Список кафедр'}]">
     <KeyValueList :items="info"></KeyValueList>
     <div>
       <div class="users-list-top">

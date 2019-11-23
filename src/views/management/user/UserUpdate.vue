@@ -1,5 +1,5 @@
 <template>
-  <ContentWrapper title="Редагування користувача" action-route="UserList" action-text="Список користувачів">
+  <ContentWrapper title="Редагування користувача" :buttons="[{ route: 'UserList', text: 'Список користувачів'}]">
     <v-form ref="form" class="manage-form">
       <BlockWIthError :errors="errors.name ? errors.name : []">
         <v-text-field

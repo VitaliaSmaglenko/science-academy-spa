@@ -1,5 +1,5 @@
 <template>
-  <ContentWrapper title="Редагування кафедри" action-route="DepartmentList" action-text="Список кафедр">
+  <ContentWrapper title="Редагування кафедри" :buttons="[{ route: 'DepartmentList', text: 'Список кафедр'}]">
     <v-form ref="form" class="manage-form">
       <BlockWIthError :errors="errors.department ? errors.department : []">
         <v-text-field

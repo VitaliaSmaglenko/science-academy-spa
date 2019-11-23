@@ -1,5 +1,5 @@
 <template>
-  <ContentWrapper title="Лист користувачів" action-route="UserCreate" action-text="Створити">
+  <ContentWrapper title="Лист користувачів" :buttons="[{ route: 'UserCreate', text: 'Створити'}]">
     <v-data-table
       :items="users"
       :headers="headers"
