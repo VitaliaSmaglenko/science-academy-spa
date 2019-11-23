@@ -120,6 +120,7 @@ export default {
       this.$refs.form.reset()
     },
     async send () {
+      this.form.work_id = this.form.work_id.toString()
       this.errors = await this.addCompletedWork(this.form)
     }
   }

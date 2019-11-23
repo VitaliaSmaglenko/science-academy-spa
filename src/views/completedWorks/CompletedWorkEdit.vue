@@ -130,7 +130,9 @@ export default {
       this.form.season = this.completedWork.season
     },
     async send () {
-      this.errors = await this.updateCompletedWork(this.form)
+      this.form.number_of_hours = this.form.number_of_hours.toString()
+      this.form.work_id = this.form.work_id.toString()
+      this.errors = await this.updateCompletedWork({ id: this.completedWork.id, data: this.form })
     }
   }
 }

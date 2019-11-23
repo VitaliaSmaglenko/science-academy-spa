@@ -5,6 +5,7 @@
                 :headers="headers"
                 locale="ru-RU"
                 :loading="loading"
+                no-data-text="Ще не було додано виконаних робіт"
                 loading-text="Завантаження..."
         >
             <template v-slot:item="{ item }">
@@ -90,7 +91,7 @@ export default {
       'deleteCompletedWork'
     ]),
     async removeCompletedWork (id) {
-      this.deleteCompletedWork(id)
+      await this.deleteCompletedWork(id)
       this.loading = true
       await this.fetchCompletedWorks()
       this.loading = false
