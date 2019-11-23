@@ -1,4 +1,5 @@
 import authHelper from './../helpers/auth'
+import roles from './../constants/roles'
 
 export default (to, from, next) => {
   const onlyGuests = to.matched.some(m => m.meta.onlyGuests)
@@ -29,6 +30,14 @@ export default (to, from, next) => {
 
   if (requiresRoles.length > 0 && !requiresRoles.some(item => user.roles.map(r => r.name).includes(item.value))) {
     return next(redirect || '/')
+  }
+
+  if (to.name === 'Dashboard') {
+    if (user.roles.some(r => roles.MANAGEMENT_ROLES.some(mr => mr.value === r.name))) {
+      return next({ name: 'Management' })
+    } else {
+      return next({ name: 'CompletedWorksList' })
+    }
   }
 
   next()

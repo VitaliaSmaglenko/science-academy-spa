@@ -12,6 +12,9 @@ const state = initial()
 const mutations = {
   setUsers (state, users) {
     state.users = users
+  },
+  reset (state) {
+    Object.assign(state, initial())
   }
 }
 

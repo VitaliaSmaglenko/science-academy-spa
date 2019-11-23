@@ -11,6 +11,9 @@ const state = initial()
 const mutations = {
   setDepartments (state, departments) {
     state.departments = departments
+  },
+  reset (state) {
+    Object.assign(state, initial())
   }
 }
 
