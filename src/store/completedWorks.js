@@ -45,6 +45,20 @@ const actions = {
     }
   },
 
+  async updateCompletedWork (context, { id, data }) {
+    try {
+      const response = await api.update(id, data)
+      Vue.notify({
+        title: '',
+        text: response.data.data.message,
+        type: 'success'
+      })
+      router.push({ name: 'CompletedWorksList' })
+    } catch (e) {
+      return e.response.data.errors
+    }
+  },
+
   async deleteCompletedWork (context, id) {
     const response = await api.delete(id)
     Vue.notify({

@@ -2,6 +2,7 @@ import roles from '../../constants/roles'
 import CompletedWorksList from '../../views/completedWorks/CompletedWorksList'
 import CompletedWorkDetails from '../../views/completedWorks/CompletedWorkDetails'
 import CompletedWorkAdd from '../../views/completedWorks/CompletedWorkAdd'
+import CompletedWorkEdit from '../../views/completedWorks/CompletedWorkEdit'
 
 const routes = [
   {
@@ -20,6 +21,12 @@ const routes = [
     path: '/completed-works/:id',
     name: 'CompletedWorkDetails',
     component: CompletedWorkDetails,
+    meta: { requiresRoles: [roles.ROLE_TEACHER], redirect: { name: 'Dashboard' } }
+  },
+  {
+    path: '/completed-works/:id/edit',
+    name: 'CompletedWorkEdit',
+    component: CompletedWorkEdit,
     meta: { requiresRoles: [roles.ROLE_TEACHER], redirect: { name: 'Dashboard' } }
   }
 ]
