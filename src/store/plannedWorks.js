@@ -2,7 +2,8 @@ import api from './../api/plannedWorks'
 import Vue from 'vue'
 
 const initial = () => ({
-  plannedWorks: []
+  plannedWorks: [],
+  targetDepartment: {}
 })
 
 const state = initial()

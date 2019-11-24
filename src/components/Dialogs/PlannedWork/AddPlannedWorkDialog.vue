@@ -110,6 +110,9 @@ export default {
     },
     async send () {
       this.form.work_id = this.form.work_id.toString()
+      this.form.quantity = this.form.quantity.toString()
+      this.form.number_of_hours = this.form.number_of_hours.toString()
+      this.form.user_id = this.userId
       this.errors = await this.addPlannedWork(this.form)
       if (!this.errors.length) {
         this.$refs.form.reset()

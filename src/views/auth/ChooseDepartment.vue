@@ -35,8 +35,9 @@ export default {
       'selectDepartment',
       'signOut'
     ]),
-    select (department) {
-      this.selectDepartment(department)
+    async select (department) {
+      await this.selectDepartment(department)
+      this.$router.push({ name: 'Dashboard' })
     },
     logout () {
       this.signOut()

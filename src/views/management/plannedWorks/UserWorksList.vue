@@ -1,10 +1,14 @@
 <template>
   <ContentWrapper title="Лист викладачів на кафедрі">
+    <template v-slot:actions>
+      <v-btn v-if="iAmAdmin" @click="selectDepartmentDialog = true" color="#983620">Обрати кафедру</v-btn>
+    </template>
     <v-data-table
       :items="filteredUsers"
       :headers="headers"
       locale="ru-RU"
       :loading="loading"
+      :no-data-text="`${department.department} не має викладачів`"
       loading-text="Завантаження..."
     >
       <template v-slot:item="{ item }">
@@ -38,13 +42,24 @@
         </tr>
       </template>
     </v-data-table>
+    <v-dialog
+      v-model="selectDepartmentDialog"
+      scrollable
+      max-width="700px"
+    >
+      <SelectDepartmentDialog
+        v-on:cancel="selectDepartmentDialog = false"
+        v-on:done="selectDepartmentDialog = false"
+      />
+    </v-dialog>
   </ContentWrapper>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import ContentWrapper from '../../../components/Layout/Management/ContentWrapper'
 import constants from './../../../constants'
+import SelectDepartmentDialog from '../../../components/Dialogs/PlannedWork/SelectDepartmentDialog'
 
 const {
   ROLE_TEACHER
@@ -52,9 +67,10 @@ const {
 
 export default {
   name: 'UserWorksList',
-  components: { ContentWrapper },
+  components: { ContentWrapper, SelectDepartmentDialog },
   data () {
     return {
+      selectDepartmentDialog: false,
       ROLE_TEACHER,
       loading: true,
       headers: [
@@ -67,9 +83,15 @@ export default {
       ]
     }
   },
-  async created () {
-    await this.fetchUsersByDepartment(this.department.id)
-    this.loading = false
+  watch: {
+    department: {
+      async handle (department) {
+        this.loading = true
+        await this.fetchUsersByDepartment(department.id)
+        this.loading = false
+      },
+      deep: true
+    }
   },
   computed: {
     ...mapState('auth', {
@@ -78,9 +100,16 @@ export default {
     ...mapState('users', {
       users: state => state.users
     }),
+    ...mapGetters('auth', [
+      'iAmAdmin'
+    ]),
     filteredUsers () {
       return this.users.filter(u => u.roles.some(r => r.name === ROLE_TEACHER.value))
     }
+  },
+  async created () {
+    await this.fetchUsersByDepartment(this.department.id)
+    this.loading = false
   },
   methods: {
     ...mapActions('users', [

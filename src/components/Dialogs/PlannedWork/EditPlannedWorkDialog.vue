@@ -141,6 +141,7 @@ export default {
       this.form.work_id = this.form.work_id.toString()
       this.form.quantity = this.form.quantity.toString()
       this.form.number_of_hours = this.form.number_of_hours.toString()
+      this.form.user_id = this.userId
       this.errors = await this.updatePlannedWork({ id: this.id, data: this.form })
       if (!this.errors.length) {
         this.form = {}
