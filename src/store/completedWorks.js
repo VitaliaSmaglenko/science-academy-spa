@@ -26,6 +26,11 @@ const actions = {
     context.commit('setCompletedWorks', response.data.data)
   },
 
+  async fetchCompletedWorksByUser (context, userId) {
+    const response = await api.getByUser(userId)
+    context.commit('setCompletedWorks', response.data.data)
+  },
+
   async getCompletedWork (context, id) {
     const response = await api.get(id)
     return response.data.data

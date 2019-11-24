@@ -9,6 +9,10 @@ export default {
     return api.get(`/completed-works/${id}`)
   },
 
+  getByUser: (userId) => {
+    return api.get(`/completed-works/users/${userId}`)
+  },
+
   create: (data) => {
     return api.post('completed-works', data)
   },

@@ -6,6 +6,13 @@
     </div>
     <div class="manage-actions">
       <v-btn
+        v-if="canManageIndicators"
+        :to="{ name: 'UserWorksList' }"
+        color="#983620"
+      >
+        Управління показниками
+      </v-btn>
+      <v-btn
         v-if="canManageDepartments"
         :to="{ name: 'DepartmentList' }"
         color="#983620"
@@ -38,6 +45,9 @@ export default {
     },
     canManageDepartments () {
       return this.getHighestRole === roles.ROLE_ADMIN.value
+    },
+    canManageIndicators () {
+      return roles.MANAGEMENT_ROLES.some(r => r.value === this.getHighestRole)
     }
   }
 }

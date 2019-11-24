@@ -1,4 +1,5 @@
 import api from './../api/users'
+import departmentApi from './../api/departments'
 import Vue from 'vue'
 import router from './../router'
 
@@ -28,6 +29,10 @@ const actions = {
   async fetchUsers (context) {
     const response = await api.all()
     context.commit('setUsers', response.data.data)
+  },
+  async fetchUsersByDepartment (context, departmentId) {
+    const response = await departmentApi.get(departmentId)
+    context.commit('setUsers', response.data.data.users)
   },
   async getUser (context, id) {
     let user = context.getters.getUser(id)

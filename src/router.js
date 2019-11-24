@@ -7,11 +7,11 @@ import Dashboard from './views/Dashboard.vue'
 import SignIn from './views/auth/SignIn'
 import ChooseDepartment from './views/auth/ChooseDepartment'
 import Management from './views/management/Management'
-import PlannedWorksForUser from './views/plannedWorks/PlannedWorksForUser'
 
 import userRoutes from './router/routes/users'
 import departmentRoutes from './router/routes/departments'
 import completeWorks from './router/routes/completedWorks'
+import plannedWorks from './router/routes/plannedWorks'
 import scienceProfiles from './router/routes/scienceProfiles'
 
 Vue.use(Router)
@@ -32,12 +32,6 @@ const router = new Router({
       meta: { ...authWithDepartment, redirect: { name: 'SignIn' } },
       children: [
         {
-          path: '/planned-works',
-          name: 'PlannedWorksForUser',
-          component: PlannedWorksForUser,
-          meta: { requiresRoles: [roles.ROLE_TEACHER], redirect: { name: 'Dashboard' } }
-        },
-        {
           path: '/manage',
           name: 'Management',
           component: Management,
@@ -46,6 +40,7 @@ const router = new Router({
         ...userRoutes,
         ...departmentRoutes,
         ...completeWorks,
+        ...plannedWorks,
         ...scienceProfiles
       ]
     },
