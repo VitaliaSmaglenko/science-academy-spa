@@ -47,7 +47,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import BlockWIthError from '../../components/UI/BlockWIthError'
+import BlockWIthError from '../../UI/BlockWIthError'
 
 export default {
   name: 'AddScienceProfileDialog',

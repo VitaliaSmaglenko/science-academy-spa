@@ -68,8 +68,8 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import ContentWrapper from '../../components/Layout/Management/ContentWrapper'
-import AddScienceProfileDialog from '../../components/Dialogs/AddScienceProfileDialog'
-import EditScienceProfileDialog from '../../components/Dialogs/EditScienceProfileDialog'
+import AddScienceProfileDialog from '../../components/Dialogs/ScienceProfile/AddScienceProfileDialog'
+import EditScienceProfileDialog from '../../components/Dialogs/ScienceProfile/EditScienceProfileDialog'
 
 export default {
   name: 'ScienceProfiles',
