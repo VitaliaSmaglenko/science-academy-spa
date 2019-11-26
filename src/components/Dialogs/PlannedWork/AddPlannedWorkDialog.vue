@@ -67,8 +67,10 @@ const {
 export default {
   name: 'AddPlannedWorkDialog',
   components: { BlockWIthError },
-  userId: {
-    require: true
+  props: {
+    userId: {
+      require: true
+    }
   },
   data () {
     return {

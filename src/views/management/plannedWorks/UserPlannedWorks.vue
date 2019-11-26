@@ -8,6 +8,7 @@
       :headers="headers"
       locale="ru-RU"
       :loading="loading"
+      no-data-text="Ще не було додано робіт"
       loading-text="Завантаження..."
     >
       <template v-slot:item="{ item }">
@@ -18,7 +19,7 @@
           <td class="text-start">{{ item.number_of_hours }}</td>
           <td class="text-start">{{ item.season }}</td>
           <td class="text-start">
-            {{ item.created_at ? new Date(item.created_at).toISOString().substring(0, 10) : '' }}
+            {{ item.created_at }}
           </td>
           <td class="text-start">
             <v-menu bottom offset-y>

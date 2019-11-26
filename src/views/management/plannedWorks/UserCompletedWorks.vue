@@ -17,7 +17,7 @@
           <td class="text-start">{{ item.number_of_hours }}</td>
           <td class="text-start">{{ item.season }}</td>
           <td class="text-start">
-            {{ item.created_at ? new Date(item.created_at).toISOString().substring(0, 10) : '' }}
+            {{ item.created_at }}
           </td>
         </tr>
       </template>

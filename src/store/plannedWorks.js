@@ -52,10 +52,10 @@ const actions = {
 
   async updatePlannedWork (context, { id, data }) {
     try {
-      const response = await api.update(id, data)
+      await api.update(id, data)
       Vue.notify({
         title: '',
-        text: response.data.data.message,
+        text: 'Роботу оновлено',
         type: 'success'
       })
       return {}
