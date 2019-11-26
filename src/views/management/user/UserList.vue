@@ -14,7 +14,7 @@
           <td class="text-start">{{ item.science_degree }}</td>
           <td class="text-start">{{ item.academic_rank }}</td>
           <td class="text-start">
-            {{ item.created_at ? new Date(item.created_at).toISOString().substring(0, 10) : '' }}
+            {{ item.created_at }}
           </td>
           <td class="text-start">
             <v-menu v-if="user.id !== item.id" bottom offset-y>
