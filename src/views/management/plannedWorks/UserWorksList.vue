@@ -84,13 +84,10 @@ export default {
     }
   },
   watch: {
-    department: {
-      async handle (department) {
-        this.loading = true
-        await this.fetchUsersByDepartment(department.id)
-        this.loading = false
-      },
-      deep: true
+    async department (department) {
+      this.loading = true
+      await this.fetchUsersByDepartment(department.id)
+      this.loading = false
     }
   },
   computed: {
